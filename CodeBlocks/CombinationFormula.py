@@ -18,7 +18,7 @@ def fact(n,memo,after):
     return memo[n]
 
 def C(n,r,memo,after):
-    return int(fact(n,memo,after) / (fact(n-r,memo,after) * fact(r,memo,after)))
+    return fact(n,memo,after) // (fact(n-r,memo,after) * fact(r,memo,after))
 
 memo = [0 for _ in range(101)]
 memo[0],memo[1],after = 1,1,2
