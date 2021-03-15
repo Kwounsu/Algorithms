@@ -4,7 +4,7 @@ def fact(n):
     if memo[n] == 0:
         for i in range(after,n+1):
             memo[i] = memo[i-1]*i
-        after = m+1
+        after = n+1
     return memo[n]
 
 def C(n,r):
