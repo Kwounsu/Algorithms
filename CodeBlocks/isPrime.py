@@ -5,3 +5,5 @@ def isPrime(n):
             return False
         i += 1
     return True
+
+# time complexity: O(√n)
