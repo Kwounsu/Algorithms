@@ -8,7 +8,7 @@ def bfs(root,graph):
         node = q.popleft()  # 큐로 먼저 넣은 것 먼저 검색하면 BFS
         if node not in visit:
             visit[node] = True
-            q.append(graph[word])
+            q.append(graph[node])
             
     return visit
 
@@ -20,6 +20,6 @@ def dfs(root,graph):
         node = stack.pop()   # 스택으로 나중에 넣은 것 먼저 검색하면 DFS
         if node not in visit:
             visit[node] = True
-            q.append(graph[word])
+            q.append(graph[node])
             
     return visit
