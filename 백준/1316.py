@@ -23,4 +23,5 @@ for _ in range(int(input())):
             if i-1>=0 and w[i-1] != c:
                 count -= 1
                 break
+                
 print(count)
