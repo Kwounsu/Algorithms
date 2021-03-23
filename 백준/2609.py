@@ -11,7 +11,7 @@
 
 import sys
 
-def get_gcf(a,b):
+def gcd(a,b):
     if a%b==0:
         return b
     while a%b:
@@ -23,7 +23,7 @@ a,b = map(int,sys.stdin.readline().split())
 if a<b:
     a,b = b,a
 
-gcf = get_gcf(a,b)
+gcf = gcd(a,b)
 lcm = (a*b)//gcf
 print(gcf)
 print(lcm)
