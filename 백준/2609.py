@@ -12,16 +12,13 @@
 import sys
 
 def gcd(a,b):
-    if a%b==0:
-        return b
+    if a<b:
+        a,b = b,a
     while a%b:
-        gcf = a%b
-        a,b = b,gcf
-    return gcf
+        a,b = b,a%b
+    return b
 
 a,b = map(int,sys.stdin.readline().split())
-if a<b:
-    a,b = b,a
 
 gcf = gcd(a,b)
 lcm = (a*b)//gcf
