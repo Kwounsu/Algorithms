@@ -1,9 +1,9 @@
 import sys
-read = sys.stdin.readline
+r = sys.stdin.readline
 
 
-s1 = read().rstrip()
-s2 = read().rstrip()
+s1 = r().rstrip()
+s2 = r().rstrip()
 
 # s1: 더 짧은 문자열
 if len(s1) > len(s2):
