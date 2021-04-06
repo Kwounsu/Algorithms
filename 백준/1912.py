@@ -1,9 +1,9 @@
 import sys
-r = sys.stdin.readline
+read = sys.stdin.readline
 
 
-N = int(r())
-a = list(map(int, r().split()))
+N = int(read())
+a = list(map(int, read().split()))
 
 for i in range(1, len(a)):
     a[i] = max(a[i - 1] + a[i], a[i])
