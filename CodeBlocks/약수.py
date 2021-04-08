@@ -1,12 +1,11 @@
-def get_divisor(n):
-    n = int(n)
-    divisors = []
-    divisors_back = [] 
+def get_divisor(n: int):
+    factors = []
+    factors_rev = []
+    
+    for i in range(1, int(n**(0.5)) + 1):
+        if n % i == 0:
+            factors.append(i)
+            if n // i != i:
+                factors_rev.append(n // i)
 
-    for i in range(1, int(n**(1/2)) + 1): 
-        if (n % i == 0):            
-            divisors.append(i)
-            if (i != (n // i)): 
-                divisors_back.append(n//i)
-
-    return divisors + divisors_back[::-1]
+    return factors + factors_rev[::-1]
