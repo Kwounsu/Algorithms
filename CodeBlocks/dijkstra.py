@@ -1,3 +1,6 @@
+import heapq
+
+
 def dijkstra(times: List[List[int]], N: int, K: int) -> int:
     # Create graph
     graph = collections.defaultdict(list)
