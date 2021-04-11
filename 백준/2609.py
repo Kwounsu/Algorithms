@@ -14,9 +14,9 @@ import sys
 def gcd(a,b):
     if a<b:
         a,b = b,a
-    while a%b:
+    while b:
         a,b = b,a%b
-    return b
+    return a
 
 a,b = map(int,sys.stdin.readline().split())
 
