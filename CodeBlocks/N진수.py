@@ -1,7 +1,7 @@
 def n_ary(n, base):
-        T = "0123456789ABCDEF"
-        q, r = divmod(n, base)
-        return T[r] if q == 0 else n_ary(q, base) + T[r]
+    T = "0123456789ABCDEF"
+    q, r = divmod(n, base)
+    return T[r] if q == 0 else n_ary(q, base) + T[r]
 
         
 # def n_ary(n, base):
