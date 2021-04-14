@@ -6,7 +6,7 @@ def solution(cache_size, cities):
         return len(cities) * 5
 
     exe_time = 0
-    cache = deque([])
+    cache = deque([])  # 큐!
 
     for c in cities:
         city = c.lower()
