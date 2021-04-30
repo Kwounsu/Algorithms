@@ -2,18 +2,18 @@ def solution(enroll, referral, seller, amount):
     answer = [0 for _ in range(len(enroll))]
     tree = {}
 
-    def sell(person, money):
-        fee = int(money * 0.1)
-        earn = money - fee
-        answer[enroll.index(person)] += earn
+    for i, name in enumerate(enroll):
+        tree[name] = i
 
-        if tree[person] != '-':
-            sell(tree[person], fee)
+    for i, name in enumerate(seller):
+        money = amount[i] * 100
 
-    for i in range(len(enroll)):
-        tree[enroll[i]] = referral[i]
-
-    for i in range(len(seller)):
-        sell(seller[i], amount[i] * 100)
+        while name != '-':
+            if money == 0:
+                break
+            fee = int(money * 0.1)
+            earn = money - fee
+            answer[tree[name]] += earn
+            name, money = referral[tree[name]], fee
 
     return answer
