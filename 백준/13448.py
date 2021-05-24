@@ -17,6 +17,7 @@ def solution(N, T, M, P, R):
             score = max(score, A[i][0] - (t + A[i][2])
                         * A[i][1] + solve(i + 1, t + A[i][2]))
             dp[i][t] = score
+            
         return score
     
     # sort: Ri / Pi <= Rj / Pj =>  i -> j
