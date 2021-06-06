@@ -15,7 +15,7 @@ for _ in range(M):
 def product_matrix(A, B):
     return [[sum(a*b for a, b in zip(A_row,B_col)) for B_col in zip(*B)] for A_row in A]
 
-AB = productMatrix(A, B)
+AB = product_matrix(A, B)
 
 # Print
 for row in AB:
