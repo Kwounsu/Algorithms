@@ -19,8 +19,8 @@ from bisect import bisect_right, bisect_left
 
 
 def count(array, target):
-    left = bisect_left(array, target)
-    right = bisect_right(array, target)
+    left = bisect_left(array, target)    # 이상
+    right = bisect_right(array, target)  # 미만
     return right - left
 
 
