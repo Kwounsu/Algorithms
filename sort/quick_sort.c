@@ -12,12 +12,24 @@ int Partition(int arr[], int left, int right){
     int high = right;
  
     while (low <= high){
+        // ASC order
         while (low <= right && pivot >= arr[low]){
             low++;
         }
         while (high >= (left+1)  && pivot <= arr[high]){
             high--;
         }
+        
+        /* 
+        // DESC order
+        while (low <= right && pivot <= arr[low]){
+            low++;
+        }
+        while (high >= (left+1)  && pivot >= arr[high]){
+            high--;
+        }
+        */
+        
         if (low <= high){
             Swap(arr, low, high);
         }
