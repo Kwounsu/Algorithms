@@ -71,12 +71,19 @@ int main(){
 #include <stdio.h>
 #include <stdlib.h>
 
-int static compare (const void* first, const void* second)
+int static compare (const void* a, const void* b)
 {
-    if (*(int*)first < *(int*)second)
+    // ASC
+    if (*(int*)a > *(int*)b)
         return 1;
-    else if (*(int*)first > *(int*)second)
+    else if (*(int*)a < *(int*)b)
         return -1;
+    /* DESC
+    if (*(int*)a < *(int*)b)
+        return 1;
+    else if (*(int*)a > *(int*)b)
+        return -1;
+    */
     else
         return 0;
 }
