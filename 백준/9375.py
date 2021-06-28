@@ -13,6 +13,7 @@
 # 각 테스트 케이스에 대해 해빈이가 알몸이 아닌 상태로 의상을 입을 수 있는 경우를 출력하시오.
 
 import sys
+from collections import defaultdict
 input = sys.stdin.readline
 
 def num_combinations(c):
@@ -20,25 +21,14 @@ def num_combinations(c):
     for cat in c:
         val *= len(c[cat])+1
     return val-1
-
-def categorize(c):
-    categorized = {}
-    for cloth,category in c:
-        if category in categorized:
-            categorized[category].append(cloth)
-        else:
-            categorized[category] = [cloth]
-    return categorized
-
-def solution(c):
-    categorized = categorize(c)
-    return num_combinations(categorized)
     
 if __name__=="__main__":
-    n = int(input())
-    for _ in range(n):
-        m = int(input())
-        c = []
-        for _ in range(m):
-            c.append(list(input().split()))
-        print(solution(c))
+    T = int(input())
+    for i in range(T):
+        item = defaultdict(list)
+        N = int(input())
+        for j in range(N):
+            name, category = input().split()
+            item[category].append(name)
+
+        print(num_combinations(item))
