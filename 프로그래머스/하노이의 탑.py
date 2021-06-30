@@ -7,7 +7,7 @@ def solution(n: int):
             return
         hanoi(_n - 1, from_pos, to_pos, aux_pos)
         answer.append([from_pos, to_pos])
-        hanoi(_n - 1, to_pos, aux_pos, from_pos)
+        hanoi(_n - 1, aux_pos, from_pos, to_pos)
 
     hanoi(n, 1, 2, 3)
     return answer
