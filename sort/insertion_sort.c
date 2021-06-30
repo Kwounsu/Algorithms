@@ -8,10 +8,5 @@ void insertion_sort(int arr[], int n){
             j--;
         }
         arr[j + 1] = key;
-        
-        // print
-        for (j=0; j<n; j++)
-            printf("%d ", arr[j]);
-        printf("\n");
     }
 }
