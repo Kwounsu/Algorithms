@@ -41,7 +41,6 @@ int main() {
                 paper++;
                 start_point = to_fix[i].second;
             }
-            // printf("%d %d %d %d\n", m, paper, start_point, to_fix[i].second);
         }
         
         if (paper > target) s = m + 1;
