@@ -15,7 +15,7 @@ int main() {
     
     while (N--) {
         cin>>num;
-        while (!s.empty() && s.back() < num) s.pop_back();
+        while (!s.empty() && s.back() <= num) s.pop_back();
         answer += s.size();
         s.push_back(num);
     }
