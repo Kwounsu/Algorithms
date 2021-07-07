@@ -20,5 +20,5 @@ int main() {
     }
       
     for (int i:answer)
-        printf("%d\n" , i);
+        printf("%d\n" , i);  // endl은 느리기 때문에 시간초과가 나옴
 }
