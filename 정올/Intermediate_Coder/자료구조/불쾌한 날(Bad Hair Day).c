@@ -9,7 +9,7 @@ int main() {
     
     while (N--) {
         scanf("%d", &num);
-        while (top > 0 && stack[top - 1] < num) top--;
+        while (top > 0 && stack[top - 1] <= num) top--;
         answer += top;
         stack[top++] = num;
     }
