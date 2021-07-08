@@ -13,7 +13,7 @@
 import sys
 
 
-def nqueen(row, n, _col, _d1, _d2):
+def nqueen(row):
     count = 0
     if row == n:
         return 1
@@ -22,7 +22,7 @@ def nqueen(row, n, _col, _d1, _d2):
         d1, d2 = row+i, n+row-i-1
         if _col[i] == _d1[d1] == _d2[d2] == False:
             _col[i] = _d1[d1] = _d2[d2] = True
-            count += nqueen(row+1, n, _col, _d1, _d2)
+            count += nqueen(row+1)
             _col[i] = _d1[d1] = _d2[d2] = False
             
     return count
@@ -30,4 +30,4 @@ def nqueen(row, n, _col, _d1, _d2):
 
 n = int(sys.stdin.readline())
 _col, _d1, _d2 = [False] * 15,[False] * 30,[False] * 30
-print(nqueen(0, n, _col, _d1, _d2))
+print(nqueen(0))
