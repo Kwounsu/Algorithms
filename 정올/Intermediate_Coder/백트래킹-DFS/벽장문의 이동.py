@@ -1,52 +1,31 @@
-import sys
-input = sys.stdin.readline
+#include <stdio.h>
+#include <stdlib.h>
 
+using namespace std;
 
-def dfs(idx, count):
-    global answer
- 
-    if idx >= m:
-        answer = min(answer, count)
-        return
- 
-    if door[nums[idx]]: 
-        dfs(idx + 1, count)
-    else:
-        lpos = 1
-        for i in range(nums[idx], 1, -1):
-            if door[i]:
-                lpos = i
-                break
-        rpos = n
-        for i in range(nums[idx], n+1):
-            if door[i]:
-                rpos = i
-                break
- 
-        if door[lpos]:
-            door[nums[idx]] = 1
-            door[lpos] = 0
-            dfs(idx+1, count + nums[idx] - lpos)
-            door[nums[idx]] = 0
-            door[lpos] = 1
- 
-        if door[rpos]:
-            door[nums[idx]] = 1
-            door[rpos] = 0
-            dfs(idx+1, count + rpos - nums[idx])
-            door[nums[idx]] = 0
-            door[rpos] = 1
+int arr[100];
+int n, m, answer = 2e7;
 
-if __name__=='__main__':
-    n = int(input())
-    a, b = map(int, input().split())
-    m = int(input().strip())
-    nums = [int(input()) for _ in range(m)]
+void dfs(int lev,int l,int r,int cost){
+    if(l>=r) return;
+    if(lev==m){
+        if(answer>cost && cost!=0) answer=cost;
+        return;
+    }
+    dfs(lev+1, arr[lev], r, abs(l-arr[lev]) + cost);
+    dfs(lev+1, l, arr[lev], abs(r-arr[lev]) + cost);
+}
+
+int main(){
+    int i, l, r;
     
-    door = [0 for i in range(n+1)]
-    door[a] = door[b] = 1
+    scanf("%d",&n);
+    scanf("%d%d",&l,&r);
+    scanf("%d",&m);
+    for(i=0; i<m; i++) scanf("%d",&arr[i]);
     
-    answer = float('inf')
-    dfs(0, 0)
+    dfs(0, l, r, 0);
+    printf("%d", answer);
     
-    print(answer)
+    return 0;
+}
