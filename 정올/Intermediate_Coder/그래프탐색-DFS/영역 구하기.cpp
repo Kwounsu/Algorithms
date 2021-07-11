@@ -6,15 +6,15 @@ int grid[128][128] = {0};
 int visited[128][128] = {0};
 vector<int> v;
 
-void bfs(int i, int j){
+void dfs(int i, int j){
     if (i >= 0 && j >= 0 && i < m && j < n && grid[i][j] == 0 && !visited[i][j]) {
         cnt++;
         visited[i][j] = 1;
 
-        bfs(i - 1, j);
-        bfs(i, j - 1);
-        bfs(i + 1, j);
-        bfs(i, j + 1);
+        dfs(i - 1, j);
+        dfs(i, j - 1);
+        dfs(i + 1, j);
+        dfs(i, j + 1);
     }
 }
 
@@ -37,7 +37,7 @@ int main() {
         for (j = 0; j < n; j++){
             if (grid[i][j] == 0 && !visited[i][j]) {
                 cnt = 0;
-                bfs(i, j);
+                dfs(i, j);
                 if (cnt > 0)
                     v.push_back(cnt);
             }
