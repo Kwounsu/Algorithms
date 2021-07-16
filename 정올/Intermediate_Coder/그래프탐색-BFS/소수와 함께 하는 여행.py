@@ -23,7 +23,7 @@ int get_num(char s[]) {
     int num = 0;
     int p = 1;
     for (int i = 3; i >= 0; i--) {
-        num += (s[i]-'0')*p;
+        num += (s[i] - '0') * p;
         p *= 10;
     }
     return num;
@@ -33,9 +33,10 @@ void bfs() {
     queue<Node> que;
     que.push(Node(src, 0));
     visit[src] = 1;
+
     while (!que.empty()) {
         Node node = que.front(); que.pop();
-        
+
         int u = node.x;
         int udist = node.d;
 
@@ -48,13 +49,13 @@ void bfs() {
         sprintf(s, "%d", u);  // s = u;
         for (int i = 0; i < 4; i++) {
             char t = s[i];
-            for (int j = (i == 0) ? 1 : 0; j < 10; j++) {
-                if (s[i]-'0'==j) continue;
+            for (int j = (i == 0); j < 10; j++) {
+                if (s[i]-'0' == j) continue;
                 s[i] = j+'0';
                 int v = get_num(s);
                 if (!prime[v] || visit[v]) continue;
                 visit[v] = 1;
-                que.push(Node(v, udist+1));
+                que.push(Node(v, udist + 1));
             }
             s[i] = t;
         }
