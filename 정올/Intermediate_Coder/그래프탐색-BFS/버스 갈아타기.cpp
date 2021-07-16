@@ -39,9 +39,9 @@ void bfs() {
         for (int v = 0; v < k; v++) {
             if (visited[v]) continue;
             if (lines[u].x1 <= lines[v].x2 
-             && lines[u].x2 >= lines[v].x1 
+             && lines[v].x1 <= lines[u].x2
              && lines[u].y1 <= lines[v].y2 
-             && lines[u].y2 >= lines[v].y1) {
+             && lines[v].y1 <= lines[u].y2) {
                 visited[v] = 1;
                 que.push(pii(udist+1, v));
             }
