@@ -19,6 +19,7 @@ bool visited[8192];
 void bfs() {
     queue<pii> que;
 
+    // 시작점에서 탈 수 있는 버스들 큐에 넣기
     for (int i = 0; i < k; i++)
         if (lines[i].x1 <= sx && sx <= lines[i].x2 
          && lines[i].y1 <= sy && sy <= lines[i].y2) {
@@ -26,6 +27,7 @@ void bfs() {
             visited[i] = 1;
         }
 
+    // BFS
     while (!que.empty()) {
         pii p = que.front();
         que.pop();
