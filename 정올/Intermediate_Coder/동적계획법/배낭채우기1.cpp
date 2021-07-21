@@ -6,7 +6,7 @@ struct Jewel {
 };
 
 vector<Jewel> jewels;
-int n, w, dp[10050];
+int n, w, dp[10001];
 
 int main() {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
