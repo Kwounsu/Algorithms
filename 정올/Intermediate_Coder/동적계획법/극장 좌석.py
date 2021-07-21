@@ -16,6 +16,7 @@ for i in range(3, n + 1):
   
 ans = 1
 
+# ans = [0~fix1] * [fix1~fix2] * [fix2~n+1]
 if m > 0:
     pre = 0
     for _ in range(m):
