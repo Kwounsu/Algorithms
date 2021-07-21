@@ -1,19 +1,31 @@
+"""
+ i번째의 무게추를 
+1.저울에 올릴 것인지, 
+2.구슬 쪽 저울에 올릴 것인지, 
+3.아무것도 하지 않을 것인지
+"""
+
 n = int(input())
 weights = list(map(int, input().split()))
 g = int(input())
 marbles = list(map(int, input().split()))
 
-dp = [[0 for _ in range(40001)] for _ in range(40001)]
-dp[0][0] = 1
+dp1 = [0] * 50000
+dp2 = [0] * 50000
+dp1[0] = dp2[0] = 1
 
-sum_ = 0
-for i in range(1, N+1):
-    sum_ += weights[i]
-    for j in range(sum_+1):
-        if dp[i-1][j] == 1:
-            dp[i][j] = 1  # 현재 추 미사용
-            dp[i][j + weights[i]] = 1  # 한쪽에 모든 추
-            dp[i][abs(j - weights[i])] = 1  # 추 양쪽 분산
+m = 0
+for w in weights:
+    m += w
+    for j in range(m + 1):
+        if dp1[j] == 1:
+            dp2[abs(j - w)] = 1 # 반대편 저울에 올리기
+            dp2[w + j] = 1      # 구슬쪽 저울에 올리기
+    for j in range(m + 1):
+        dp1[j] = dp2[j]
 
 for marble in marbles:
-    print('Y' if dp[n][marble] else 'N')
+    if dp1[marble]: 
+        print("Y", end=' ')
+    else: 
+        print("N", end=' ')
