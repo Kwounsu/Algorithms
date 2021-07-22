@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
  
-int dp[1000001];
+int dp[1000001];  // i까지 봤을 때의 총 전투력이 S보다 작거나 같은 경우의 수
  
 int main() {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
