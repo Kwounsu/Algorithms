@@ -1,25 +1,20 @@
-def solution(w):
-    for i in range(coin[len(coin) - 1], w + 1):
-        m = float('inf')
-        for j in coin:
-            if d[i - j] == 0:
-                continue
-            if m > d[i - j] + 1:
-                    m = d[i - j] + 1
-        if m != float('inf'):
-            d[i] = m
-    if d[w] == 0:
-        return "impossible"
-    else:
-        return d[w]
- 
-   
-n = int(input().strip())
-coin = sorted(list(map(int, input().split())))
-w = int(input().strip())
+n = int(input())
+coin = list(map(int, input().split()))
+w = int(input())
 
-d = [0] * (w + 1)
+d = [-1] * (w + 1)
 for c in coin:
     d[c] = 1
 
-print(solution(w))
+for i in range(1, w + 1):
+    for c in coin:
+        if c <= i and d[i - c] != -1:
+            if d[i] != -1:
+                d[i] = min(d[i], d[i - c] + 1)
+            else:
+                d[i] = d[i - c] + 1
+
+if d[w] == -1:
+    print("impossible")
+else:
+    print(d[w])
