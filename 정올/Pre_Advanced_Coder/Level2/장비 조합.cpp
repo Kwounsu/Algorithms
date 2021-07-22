@@ -2,7 +2,6 @@
 using namespace std;
 
 int dp[1000001];  // i까지 봤을때 가짓수
-dp[0] = 1;
 
 int main() {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
@@ -11,9 +10,9 @@ int main() {
     cin>>N>>S;
     for (int i = 0; i < N; i++)
         cin>>w[i]>>q[i];
-
-    for (int i = 0; i < N; i++)
         S -= w[i] * q[i];
+    
+    dp[0] = 1;
 
     for (int i = 0; i < N; i++)
         for (int j = 0; j <= S; j++)
