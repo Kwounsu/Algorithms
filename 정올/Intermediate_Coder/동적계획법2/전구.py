@@ -1,23 +1,36 @@
+import sys
+import bisect
+from collections import deque
+input = sys.stdin.readline
+
+
 n = int(input())
 switch = list(map(int, input().split()))
 light = list(map(int, input().split()))
+index = [light.index(switch[i]) for i in range(n)]
 
-dp = [1] * n
+dp = [index[0]]
+tmp = [[0, index[0]]]
 for i in range(1, n):
-    for j in range(i):
-        if (light.index(switch[i]) > light.index(switch[j])):
-            dp[i] = max(dp[i], dp[j] + 1)
+    if dp[-1] < index[i]:
+        dp.append(index[i])
+        tmp.append([len(dp)-1, index[i]])
+    else:
+        new_pos = bisect.bisect_left(dp, index[i])
+        dp[new_pos] = index[i]
+        tmp.append([new_pos, index[i]])
 
-# 전구가 켜지게 하는 최대 스위치 수
-ans = max(dp)
-print(ans)
-
-# 스위치 번호를 구하기 위한 LIS추적
-idx = dp.index(ans)
-nums = []
-while idx >= 0:
-    if dp[idx] == ans:
-        nums.append(switch[idx])
-        ans -= 1
-    idx -= 1
-print(*nums)
+ans = deque()
+current_pos = len(dp) - 1
+for i in range(n-1, -1, -1):
+    p, x = tmp[i]
+    if p == current_pos:
+        ans.appendleft(x)
+        current_pos -= 1
+        if current_pos < 0:
+            break
+ 
+print_ans = [light[x] for x in ans]
+print_ans.sort()
+print(len(print_ans))
+print(' '.join(map(str, print_ans)))
