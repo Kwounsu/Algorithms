@@ -20,13 +20,22 @@ for i in range(1, len1+1):
 ans = max([max(x) for x in dp])
 print(ans)
 
-# dp[i][j] 최대값 위치 찾기
+# dp[i][j] 최대값 위치 찾기 (DNA문자 마지막 위치)
 for i, x in enumerate(dp):
     if ans in x:
-        i_idx, j_idx = i, x.index(ans)
+        e_i, e_j = i, x.index(ans)
 
-# debug
-for i in range(len1+1):
-    for j in range(len2+1):
-        print(dp[i][j],end=' ')
-    print()
+s_i, s_j = e_i, e_j
+# 역추적 - 시작점 찾기
+while dp[s_i][s_j] != 0:
+    if dp[s_i-1][s_j] == dp[s_i][s_j] + 2:
+        s_i -= 1
+    elif dp[s_i][s_j-1] == dp[s_i][s_j] + 2:
+        s_j -= 1
+    else:
+        s_i -= 1
+        s_j -= 1
+
+# 문장 출력
+print(str1[s_i:e_i])
+print(str2[s_j:e_j])
