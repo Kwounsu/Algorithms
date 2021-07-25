@@ -24,7 +24,7 @@ int main() {
 
 	cin>>n;
 	for(i = 1; i <= n; i++)
-        cin>>pattern[i];
+	cin>>pattern[i];
 
     // find cycles
     for (i = 1; i <= n; i++) {
