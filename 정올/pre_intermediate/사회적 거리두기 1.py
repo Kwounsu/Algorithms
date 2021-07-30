@@ -2,36 +2,30 @@ import sys
 input = sys.stdin.readline
 
 
-# check given social distance is possible
-def is_possible(sd, cows):
-    distance, moved_cow = 0, 2
-    for i, cow in enumerate(cows):
-        if cow == '1':
-            distance = 1
-        else:
-            distance += 1
-        if distance > sd:
-            moved_cow -= 1
-            distance = 1
-        # print(f"{i}:{cow}, d:{distance}, mc: {moved_cow}")
-    if moved_cow <= 0:
-        return True
-    return False
+def solution(n, cows):
+    cow_idx = [i for i,x in enumerate(cows) if x=='1']
+    if len(cow_idx) == 0:
+        return n - 1
 
+    dis = sorted([cow_idx[i] - cow_idx[i-1] for i in range(1, len(cow_idx))])
 
-# print(is_possible(1, '1000001'))
-# print(is_possible(2, '0000000'))
+    s, e = cow_idx[0], cow_idx[-1]
+    if len(dis) == 0:
+        return max(min(s, n-e-1), max(s//2, (n-e-1)//2))
+    
+    minD, maxD = dis[0], dis[-1]
+    maxD2 = dis[-2] if len(dis) >= 2 else 0  # second max dis
+    
+    return max([1,
+        min(s//2, minD), 
+        min((n-1-e)//2, minD),
+        min(min(s, n-1-e), minD),
+        min(min(s, maxD//2), minD),
+        min(min(n-1-e, maxD//2), minD),
+        min(min(maxD//2, maxD2//2), minD),
+        min(maxD//3, minD)])
+
 
 n = int(input())
-c = input().strip()
-
-s, e, ans = 1, n + 1, 1
-while s <= e:
-    m = (s + e) // 2
-    if is_possible(m, c):
-        ans = max(ans, m)
-        s = m + 1
-    else:
-        e = m - 1
-
-print(ans)
+cows = input().strip()
+print(solution(n, cows))
