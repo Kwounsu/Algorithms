@@ -2,15 +2,14 @@
 using namespace std;
 
 int oneCount(long long int n){
-	int cnt = 0;
-	while(n){
-        if (n % 2 != 0) cnt++;
-		n /= 2;
-	}
-	return cnt;
+	int i;
+    for(i = 0; n != 0; i++) {
+        n &= n-1;
+    }
+    return i;
 }
 
-long long int bigger(int n){
+long long int bigger(long long int n){
 	long long int answer = n;
 	while(1){
 		answer++;
@@ -19,7 +18,7 @@ long long int bigger(int n){
 	return answer;
 }
 
-long long int smaller(int n){
+long long int smaller(long long int n){
 	long long int answer = n;
 	while(1){
 		answer--;
