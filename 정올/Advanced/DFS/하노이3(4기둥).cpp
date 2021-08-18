@@ -3,6 +3,7 @@ using namespace std;
 
 int arr[25], h3[25], h4[25];
 
+// (1<<k)-1
 void get_h3(int k){
     h3[1]=1;
     for(int i = 2; i <= k; i++)
