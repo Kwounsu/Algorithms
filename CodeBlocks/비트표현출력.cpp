@@ -1,9 +1,6 @@
-void bit(int x){
-    for(int i = 31; i >= 0; i--){
-        if (x&(1<<i)) cout<<1;
-        else cout<<0;
-    }
-    cout<<'\n';
+void bit(ll x){
+    if(x != 1) bit(x/2);
+    cout<<x % 2;
 }
 
 // 함수 이름 뒤에 ll이 붙으면 long long, 아니면 int
