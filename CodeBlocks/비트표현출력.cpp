@@ -3,6 +3,7 @@ void bit(int x){
         if (x&(1<<i)) cout<<1;
         else cout<<0;
     }
+    cout<<'\n';
 }
 
 // 함수 이름 뒤에 ll이 붙으면 long long, 아니면 int
