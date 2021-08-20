@@ -22,5 +22,6 @@ arr, ans = [], []
 dfs(size - 2)
 
 ans.sort()
+print(len(ans))
 for A, B in ans:
     print(f"{A} + {B} = {n}")
