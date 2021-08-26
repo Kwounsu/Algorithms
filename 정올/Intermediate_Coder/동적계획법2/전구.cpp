@@ -1,57 +1,43 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
-class Line {
-public:
-    int swtch, light, idx;
-    Line(){swtch=0; light=0;}
-}lines[10010];
-
-int N, dp[10010], path[10010];
-int indices[10010], tracked_path[10010], res[10010];
-
+ 
+int n, val, ans, j;
+int a[10010], b[10010], lis[10010];
+int path[10010], indices[10010];
+ 
 int main() {
-    cin >> N;
-
-    int val;
-    for(int i=1;i<=N;i++) {
-        scanf("%d",&val);
-        lines[i].swtch = val;
-        lines[val].idx = i;
+    ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL);
+ 
+    cin>>n;
+    for(int i = 1; i <= n; i++) {
+        cin>>val;
+        a[val] = i;
+        indices[i] = val;
     }
-    for(int i=1;i<=N;i++) {
-        scanf("%d",&val);
-        lines[i].light = val;
-        indices[i] = lines[val].idx;
+    for(int i = 0; i < n; i++) {
+        cin>>val;
+        b[i] = a[val];
     }
-
-    for(int i=1;i<=N;i++) printf("%d %d\n", lines[i].idx, indices[i]);
-
-    int cnt=0, pos;
-    for(int i = 1; i <= N; i++){
-        for(pos = cnt-1; pos >= 0; pos--){
-            if(dp[pos] < indices[i]) break;
-        }
-        dp[pos+1] = indices[i];
-        if(pos >= 0)path[indices[i]] = dp[pos];
-        if(pos+1 == cnt) cnt++;
+ 
+    for(int i = 0; i < n; i++) {
+        for(j = ans - 1; j >= 0; j--)
+            if(lis[j] <= b[i])
+                break;
+        lis[j + 1] = b[i];
+        if(j + 1 == ans) ans++;
+        if(j != -1) path[b[i]] = lis[j];
+        else path[b[i]] = 0;
     }
-
-    int next = dp[cnt-1];
-    int c=0;
-    while(next){
-        res[c++] = next;
-        next = path[next];
+ 
+    cout<<ans<<'\n';
+    val = lis[ans - 1], ans = 0;
+    while(val != 0) {
+        a[ans++] = indices[val];
+        val = path[val];
     }
-
-    for(int i = 0 ; i < c;i++)
-        tracked_path[i] = lines[res[i]].swtch;
-
-    sort(tracked_path,tracked_path+c);
-
-    cout<<cnt<<'\n';
-    for(int i = 0;i < c; i++)
-        cout<<tracked_path[i]<<' ';
-
+    sort(a, a + ans);
+    for(int i = 0; i < ans; i++)
+        cout<<a[i] <<' ';
+ 
     return 0;
 }
