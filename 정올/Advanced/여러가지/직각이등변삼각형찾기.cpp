@@ -127,6 +127,6 @@ int main() {
         REP(i,0,2) cout<<p[i].X<<' '<<p[i].Y<<endl;
     } else cout<<0<<endl;
 
-    REP(i,1,10) {REP(j,1,10) cout<<a[i][j]; cout<<endl;}
+    //REP(i,1,10) {REP(j,1,10) cout<<a[i][j]; cout<<endl;}
     return 0;
 }
