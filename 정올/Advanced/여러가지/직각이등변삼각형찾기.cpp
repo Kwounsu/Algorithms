@@ -2,10 +2,6 @@
 using namespace std;
 #define endl '\n'
 #define REP(i,a,b) for (auto i=(a); i<=(b); i++)
-#define debug(x) cout << #x << " is " << x << endl
-#define pii pair<int,int>
-#define X first
-#define Y second
 
 /*
                                        |\    /|
