@@ -1,64 +1,81 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#define ULL unsigned long long
 
-int N, K, M, J, c, s;
-vector<bitset<30>> bits;
-queue<int> q;
-stack<int> output;
-int pre[100010];
-bool visited[100010];
+struct data{
+    int id, num;
+    bool operator <(const data &r)const{
+        return num<r.num;
+    }
+}A[100001],B[100001], t;
 
-void print_route(int p){
-	while (p > 0){
-		output.push(p);
-		p = pre[p];
-	}
-	while(!output.empty()){
-		cout<<output.top()<<' ';
-		output.pop();
-	}
-	cout<<'\n';
+int path[100001], visited[100001], n, k, m;
+queue <data> q;
+
+int bsearch(int s,int e,int tg){
+    while(s<=e){
+        int m=(s+e)/2;
+        if (B[m].num==tg) return B[m].id;
+        if (B[m].num<tg) s=m+1;
+        else e=m-1;
+    }
+    return 0;
 }
 
-int hamming(int a, int b){
-	int val = __builtin_popcount(bits[a].to_ulong()^bits[b].to_ulong());
-    cout<<a<<','<<b<<"'s h: "<<val<<'\n';
-    return val;
+// (now_idx, now_num, pre_idx)
+void push(int ni,int nn, int pi){
+    if (visited[ni]) return;
+    visited[ni]=1;
+    path[ni]=pi;
+    q.push({ni,nn});
 }
 
 void bfs(){
-	q.push(0);
-	pre[0] = -1;
-	visited[0] = true;
-	while(!q.empty()){
-		c = q.front(); q.pop();
-		if (visited[c]) continue;
-		visited[c] = true;
-		for (int i=1; i<N; i++){
-			if (i==c || hamming(c,i)!=1) continue;
-			pre[i] = c;
-			q.push(i);
-		}
-	}
+    push(1, A[1].num, 0);
+    while(!q.empty()){
+        t=q.front(); q.pop();
+        for (int i=0;i<k;i++){
+            int num = t.num^(1<<i);
+            int id = bsearch(1,n,num);
+            if (id==0) continue;
+            push(id,num,t.id);
+        }
+    }
+}
+
+void output(int j){
+    if (j==1){
+        printf("%d ",j);
+        return;
+    }
+    output(path[j]);
+    printf("%d ",j);
 }
 
 int main(){
-	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    scanf("%d%d", &n, &k);
+    for (int i=1;i<=n;i++){
+        int bin=0, a;
+        for (int j=0;j<k;j++){
+            scanf("%1d",&a);
+            bin=bin*2+a; //Horner's method
+        }
+        A[i]=B[i]={i,bin};
+    }
 
-	cin>>N>>K;
-	bits.resize(N);
-	for(int i=0; i<N; i++)
-		cin>>bits[i];
+    sort(B+1,B+n+1);
 
-	bfs();
+    bfs();
 
-	cin>>M;
-	for(int i=0; i<M; i++){
-		cin>>J;
-		if (!visited[J]) cout<<-1<<'\n';
-		else print_route(J);
-	}
+    scanf("%d", &m);
+    for (int i=1;i<=m;i++){
+        scanf("%d", &k);
+        if (path[k]==0) {
+            printf("-1\n");
+        }else {
+            output(k);
+            printf("\n");
+        }
+    }
 
-	return 0;
+    return 0;
 }
