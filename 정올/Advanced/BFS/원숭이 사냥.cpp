@@ -4,7 +4,7 @@
 using namespace std;
 
 int n, m, step, cur, tmp, nxt;
-vector<int> adj[22];
+vector<vector<int>> adj;
 queue<pair<int,int>> q;  // <bit, step>
 int visited[1<<21], path[1<<21], path_i[1<<21];
 
@@ -50,7 +50,8 @@ void bfs(){
 }
 
 void init(){
-    for(int i=0; i<22; i++) adj[i].clear();
+    adj.resize(n);
+    for(int i=0; i<n; i++) adj[i].clear();
     while(!q.empty()) q.pop();
     memset(visited,0,sizeof(visited));
     memset(path   ,0,sizeof(path));
@@ -61,9 +62,9 @@ int main(){
     ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
 
     while(1){
-        init();
         cin>>n>>m;
         if(n==0 && m==0) break;
+        init();
         int a, b;
         for(int i=0; i<m; i++){
             cin>>a>>b;
