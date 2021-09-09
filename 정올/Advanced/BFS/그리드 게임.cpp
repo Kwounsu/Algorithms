@@ -4,15 +4,31 @@
 using namespace std;
 
 int n, m, nx, ny, c=2;
-int grid[124][124];
+int grid[128][128];
 int dx[4]={0,0,1,-1}, dy[4]={1,-1,0,0};
-set<int> adj[1<<14];
-bool visited[124][124];
+set<int> adj[10010];
 queue<pair<int,int>> q;
+int visited[10010];
+int limits[10010];
+int ans = 100000;
 
-void bfs(){
-    q.push(0)
-
+void bfs(int st){
+    q.push({st,1});
+    int dist=0;
+    while(!q.empty()){
+        int cur = q.front().X, step = q.front().Y; q.pop();
+        if(visited[cur]) continue;
+        visited[cur] = step;
+        dist = step-1;
+        for(auto a:adj[cur])
+            q.push({a,step+1});
+    }
+    for(int i=2;i<c;i++){
+        if(limits[i] >= ans) continue;
+        limits[i] = max(visited[i]-1, dist-visited[i]+1);
+    }
+    if(dist>0 || c<=3)
+        ans = min(ans, dist);
 }
 
 void find_adj(int x, int y){
@@ -36,8 +52,13 @@ void dfs(int x, int y, int p){
 }
 
 int main(){
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+//    ifstream fin("input.txt");
+//    fin>>n>>m;
+//    for(int i=0;i<n;i++)
+//        for(int j=0;j<m;j++)
+//            fin>>grid[i][j];
 
+    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
     cin>>n>>m;
     for(int i=0;i<n;i++)
         for(int j=0;j<m;j++)
@@ -56,23 +77,12 @@ int main(){
             find_adj(i,j);
 
     for(int i=2;i<c;i++){
-        fill(&visited[0][0], &visited[n][m], false);
-        q.push()  // TODO
-        bfs();
+        if(limits[i] >= ans) continue;
+        memset(visited,0,sizeof(visited));
+        bfs(i);
     }
 
-//    for(int i=0;i<n;i++){
-//        for(int j=0;j<m;j++)
-//            cout<<grid[i][j]<<' ';
-//        cout<<'\n';
-//    }
-//
-//    for(int i=2;i<c;i++){
-//        cout<<i<<": ";
-//        for(auto x:adj[i])
-//            cout<<x<<' ';
-//        cout<<'\n';
-//    }
+    cout<<ans<<'\n';
 
     return 0;
 }
