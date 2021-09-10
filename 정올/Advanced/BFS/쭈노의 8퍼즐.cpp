@@ -5,10 +5,15 @@ vector<vector<int>> adj{{},
     {2,4},{1,3,5},{2,6},
     {1,5,7},{2,4,6,8},{3,5,9},
     {4,8},{5,7,9},{6,8}};
-unordered_map<int,int> visited;
+unordered_map<int,int> visited, path;
 struct dat{int arr[10],step;};
 queue<dat> q;
 
+void track(int x){
+    if(x == -1) return;
+    track(path[x]);
+    cout<<path[x];
+}
 
 int num(int a[]){
     int ret = 0;
@@ -29,7 +34,7 @@ void bfs(){
         int n = num(cur.arr);
         if(n == 123456780){
             cout<<cur.step<<'\n';
-            trace(cur.)
+            track(9);
             break;
         }
         if(visited[n]) continue;
@@ -40,6 +45,7 @@ void bfs(){
             narr[x] = narr[el];
             narr[el] = 0;
             q.push({narr,cur.step+1,cur.arr[el]});
+            path[]
         }
     }
 }
